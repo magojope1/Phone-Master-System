@@ -2,9 +2,20 @@
 // PHONE MASTER LOGIN SYSTEM
 // ======================================
  
-const adminUsername = "jron";
-const adminPassword = "Gabby27";
- 
+// ADMIN USERS
+const adminUsers = [
+    {
+        username: "jron",
+        password: "Gabby27"
+    },
+    {
+        username: "JL",
+        password: "123456"
+    },
+
+];
+
+
 const loginForm = document.getElementById("loginForm");
 const loginPage = document.getElementById("loginPage");
 const appContainer = document.querySelector(".app-container");
@@ -20,10 +31,12 @@ loginForm.addEventListener("submit", function(event) {
     const password =
         document.getElementById("loginPassword").value;
  
-    if (
-        username === adminUsername &&
-        password === adminPassword
-    ) {
+    const validUser = adminUsers.find(user =>
+    user.username === username &&
+    user.password === password
+);
+
+if (validUser) {
  
         sessionStorage.setItem("phoneMasterLogin", "true");
  
