@@ -665,3 +665,248 @@ tr:hover td {
     }
 }
  
+/* ==========================================
+   PHONE MASTER - ANIMATED SPORTS STADIUM THEME
+========================================== */
+
+/* Main animated background */
+body {
+    background: #030914;
+    color: #f1f5f9;
+    position: relative;
+    isolation: isolate;
+}
+
+/* Stadium lights and neon atmosphere */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(ellipse at 50% 0%,
+            rgba(0, 110, 255, .30), transparent 45%),
+        radial-gradient(ellipse at 0% 45%,
+            rgba(0, 255, 100, .13), transparent 35%),
+        radial-gradient(ellipse at 100% 75%,
+            rgba(0, 130, 255, .20), transparent 40%),
+        linear-gradient(135deg,
+            #020610, #07172c, #020914, #061a22);
+
+    background-size: 200% 200%;
+    animation: stadiumLights 14s ease-in-out infinite alternate;
+}
+
+/* Moving neon stadium beams */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 35%,
+            rgba(0, 255, 100, .07) 48%,
+            transparent 60%
+        ),
+        linear-gradient(
+            65deg,
+            transparent 60%,
+            rgba(0, 140, 255, .10) 72%,
+            transparent 85%
+        );
+
+    background-size: 200% 200%;
+    animation: movingBeams 12s linear infinite;
+}
+
+@keyframes stadiumLights {
+    0% {
+        background-position: 0% 20%;
+    }
+    100% {
+        background-position: 100% 80%;
+    }
+}
+
+@keyframes movingBeams {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Keep app background transparent */
+.app-container {
+    background: transparent !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Login background */
+.login-page {
+    background: transparent !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Top navigation */
+.topbar {
+    background: rgba(2, 9, 22, .88);
+    border-bottom: 1px solid rgba(0, 255, 110, .35);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, .35);
+}
+
+/* Neon logo */
+.logo span {
+    color: #39ff70;
+    text-shadow: 0 0 12px rgba(57, 255, 112, .7);
+}
+
+/* Navigation buttons */
+.nav-btn:hover,
+.nav-btn.active {
+    background: linear-gradient(135deg, #087a32, #00d957);
+    box-shadow: 0 0 18px rgba(0, 255, 90, .35);
+}
+
+/* Welcome heading */
+.welcome-tag,
+.small-title {
+    color: #39ff70;
+}
+
+/* Hero heading */
+.hero h1 span {
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #39ff70,
+        #00aaff
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Glass dashboard cards */
+.card,
+.form-box,
+.table-box,
+.hero-decoration,
+.login-card {
+    background: rgba(5, 17, 34, .78);
+    border: 1px solid rgba(0, 255, 110, .20);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .25);
+}
+
+/* Animated card glow */
+.card,
+.website-card {
+    transition: all .35s ease;
+}
+
+.card:hover,
+.website-card:hover {
+    border-color: #39ff70;
+    box-shadow:
+        0 0 12px rgba(0, 255, 100, .25),
+        0 12px 30px rgba(0, 0, 0, .4);
+}
+
+/* Green total card */
+.total-card {
+    background: linear-gradient(135deg, #075b2b, #00a844);
+    box-shadow: 0 0 22px rgba(0, 255, 90, .2);
+}
+
+/* Main buttons */
+.primary-btn,
+#recordForm button {
+    background: linear-gradient(135deg, #087a32, #00d957);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 255, 90, .20);
+}
+
+.primary-btn:hover,
+#recordForm button:hover {
+    box-shadow: 0 0 22px rgba(0, 255, 90, .45);
+    transform: translateY(-3px);
+}
+
+/* Outline buttons */
+.outline-btn {
+    border-color: #39ff70;
+}
+
+.outline-btn:hover {
+    background: rgba(0, 255, 100, .12);
+    box-shadow: 0 0 15px rgba(0, 255, 100, .2);
+}
+
+/* Table header */
+th {
+    background: linear-gradient(135deg, #075b2b, #073c2a);
+    color: #ffffff;
+}
+
+/* Table hover */
+tr:hover td {
+    background: rgba(0, 255, 100, .07);
+}
+
+/* Input focus */
+input:focus,
+select:focus {
+    border-color: #39ff70;
+    box-shadow: 0 0 0 2px rgba(57, 255, 112, .15);
+}
+
+/* Login button */
+.login-card button {
+    background: linear-gradient(135deg, #087a32, #00d957);
+    box-shadow: 0 0 15px rgba(0, 255, 90, .2);
+}
+
+.login-card button:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 90, .45);
+}
+
+/* Website card headings */
+.website-card h3 {
+    color: #e2ffe9;
+}
+
+.website-card h1 {
+    color: #39ff70;
+}
+
+.website-card span {
+    color: #72e9a0;
+}
+
+/* Login title glow */
+.login-card h1 {
+    text-shadow: 0 0 15px rgba(57, 255, 112, .3);
+}
+
+/* Reduce animation for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    body::after {
+        animation: none;
+    }
+
+    * {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
