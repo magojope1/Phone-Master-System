@@ -1,21 +1,150 @@
+ 
+// ===================================
+// WEBSITE DETAILS SYSTEM
+// ===================================
+ 
+let currentWebsite = "";
+ 
+function openWebsite(website) {
+ 
+    currentWebsite = website;
+ 
+    // Hide other pages
+    document.querySelectorAll(".page-view").forEach(page => {
+        page.classList.remove("active");
+    });
+ 
+    // Show selected website page
+    document.getElementById("websiteDetails")
+        .classList.add("active");
+ 
+    // Update website title
+    document.getElementById("selectedWebsite").textContent = website;
+ 
+    document.getElementById("websiteTableTitle").textContent =
+        website + " Records";
+ 
+    document.getElementById("websiteSearch").value = "";
+ 
+    displayWebsiteRecords();
+ 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+ 
+ 
+// DISPLAY SELECTED WEBSITE RECORDS
+function displayWebsiteRecords() {
+ 
+    let records = JSON.parse(
+        localStorage.getItem("masterList")
+    ) || [];
+ 
+    let filteredRecords = records.filter(record =>
+        (record.Website || "").toUpperCase() ===
+        currentWebsite.toUpperCase()
+    );
+ 
+    let search = document.getElementById("websiteSearch")
+        .value.toLowerCase();
+ 
+    filteredRecords = filteredRecords.filter(record => {
+ 
+        return (
+            (record.name || "").toLowerCase().includes(search) ||
+            (record.AccountNumber || "").toLowerCase().includes(search) ||
+            (record.Reason || "").toLowerCase().includes(search)
+        );
+ 
+    });
+ 
+    document.getElementById("websiteTotal").textContent =
+        records.filter(record =>
+            (record.Website || "").toUpperCase() ===
+            currentWebsite.toUpperCase()
+        ).length;
+ 
+    let table = document.getElementById("websiteRecordTable");
+ 
+    table.innerHTML = "";
+ 
+    if (filteredRecords.length === 0) {
+ 
+        table.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    No records found for ${currentWebsite}.
+                </td>
+            </tr>
+        `;
+ 
+        return;
+    }
+ 
+    filteredRecords.forEach((record, index) => {
+ 
+        let row = document.createElement("tr");
+ 
+        [
+            index + 1,
+            record.date || "",
+            record.AccountNumber || "",
+            record.name || "",
+            record.Reason || ""
+        ].forEach(value => {
+ 
+            let cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+ 
+        });
+ 
+        table.appendChild(row);
+ 
+    });
+ 
+}
+ 
+ 
+// SEARCH WEBSITE RECORDS
+document.getElementById("websiteSearch")
+    .addEventListener("input", displayWebsiteRecords);
+ 
+ 
+// BACK TO DASHBOARD
+function backToDashboard() {
+ 
+    document.querySelectorAll(".page-view").forEach(page => {
+        page.classList.remove("active");
+    });
+ 
+    document.getElementById("dashboard")
+        .classList.add("active");
+ 
+    document.querySelectorAll(".nav-btn").forEach(nav => {
+        nav.classList.toggle(
+            "active",
+            nav.dataset.page === "dashboard"
+        );
+    });
+ 
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+ 
+}
+ 
+ 
 // ======================================
 // PHONE MASTER LOGIN SYSTEM
 // ======================================
  
-// ADMIN USERS
-const adminUsers = [
-    {
-        username: "jron",
-        password: "Gabby27"
-    },
-    {
-        username: "JL",
-        password: "123456"
-    },
-
-];
-
-
+const adminUsername = "jron";
+const adminPassword = "Gabby27";
+ 
 const loginForm = document.getElementById("loginForm");
 const loginPage = document.getElementById("loginPage");
 const appContainer = document.querySelector(".app-container");
@@ -31,12 +160,10 @@ loginForm.addEventListener("submit", function(event) {
     const password =
         document.getElementById("loginPassword").value;
  
-    const validUser = adminUsers.find(user =>
-    user.username === username &&
-    user.password === password
-);
-
-if (validUser) {
+    if (
+        username === adminUsername &&
+        password === adminPassword
+    ) {
  
         sessionStorage.setItem("phoneMasterLogin", "true");
  
@@ -163,8 +290,8 @@ function displayRecords() {
             (record.AccountNumber || "").toLowerCase().includes(searchValue) ||
             (record.Website || "").toLowerCase().includes(searchValue) ||
             (record.Reason || "").toLowerCase().includes(searchValue) ||
-            (record.Banksite || "").toLowerCase().includes(searchValue) ||
-            (record.date || "").toLowerCase().includes(searchValue)
+            (record.date || "").toLowerCase().includes(searchValue) ||
+            (record.Banksite || "").toLowerCase().includes(searchValue)
         );
     });
  
@@ -179,8 +306,7 @@ function displayRecords() {
             record.name || "",
             record.Website || "",
             record.Reason || "",
-            record.Banksite || ""
-            
+            record.Banksite || "",
         ];
  
         values.forEach(value => {
@@ -257,8 +383,6 @@ recordForm.addEventListener("submit", function(event) {
         ),
  
         name: document.getElementById("name").value.trim(),
-
-        Banksite: document.getElementById("Banksite").value.trim(),
  
         date: document.getElementById("recordDate").value,
  
@@ -266,15 +390,17 @@ recordForm.addEventListener("submit", function(event) {
  
         Website: document.getElementById("Website").value,
  
-        Reason: document.getElementById("Reason / Remarks").value.trim()
+        Reason: document.getElementById("Reason / Remarks").value.trim(),
+
+        Banksite: document.getElementById("Banksite").value.trim()
     };
  
     if (
         !record.name ||
-        !record.Banksite ||
         !record.date ||
         !record.AccountNumber ||
-        !record.Website
+        !record.Website ||
+        !record.Banksite
     ) {
         alert("Please complete all required fields.");
         return;
@@ -322,10 +448,7 @@ function editRecord(id) {
     document.getElementById("editId").value = record.id;
  
     document.getElementById("name").value = record.name || "";
-
-    document.getElementById("Banksite").value = 
-        record.Banksite || "";
-    
+ 
     document.getElementById("recordDate").value = record.date || "";
  
     document.getElementById("Account Number").value =
@@ -335,6 +458,9 @@ function editRecord(id) {
  
     document.getElementById("Reason / Remarks").value =
         record.Reason || "";
+    
+    document.getElementById("Banksite").value =
+        record.Banksite || "";
  
     document.getElementById("saveButton").textContent = "Update Record";
  
@@ -386,3 +512,5 @@ searchInput.addEventListener("input", displayRecords);
 // ======================================
  
 displayRecords();
+ 
+ 

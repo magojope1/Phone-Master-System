@@ -1,3 +1,55 @@
+/* CLICKABLE WEBSITE CARDS */
+ 
+.website-card {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s ease;
+    border-radius: 15px;
+    border: 1px solid #e1e7f0;
+}
+ 
+.website-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    border-color: #4779c7;
+}
+ 
+.website-card h3 {
+    color: #233c65;
+}
+ 
+.website-card h1 {
+    font-size: 32px;
+    color: #2563eb;
+}
+ 
+.website-card span {
+    color: #4779c7;
+    font-size: 13px;
+    font-weight: bold;
+}
+ 
+.website-icon {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+ 
+/* WEBSITE DETAILS */
+ 
+#websiteDetails .table-box {
+    margin-top: 25px;
+}
+ 
+#websiteDetails .primary-btn {
+    margin-top: 20px;
+}
+ 
+#websiteDetails .table-container {
+    overflow-x: auto;
+}
+ 
+ 
 /* DATE INPUT ICON */
 input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
@@ -5,8 +57,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 22px;
     height: 22px;
 }
-
-
+ 
+ 
 /* LOGIN PAGE */
  
 .login-page {
